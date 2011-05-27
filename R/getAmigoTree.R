@@ -1,4 +1,4 @@
-RamiGO <- function(picType = "png", modeType = "basic", goIDs = NULL, color = NULL, filename = NULL){
+getAmigoTree <- function(picType = "png", modeType = "basic", goIDs = NULL, color = NULL, filename = NULL){
   if(is.null(goIDs)){
     stop("RamiGO: You must specifiy GO ID's!")
   }
@@ -18,7 +18,7 @@ RamiGO <- function(picType = "png", modeType = "basic", goIDs = NULL, color = NU
   ## write results out for amigo
   ## %22 = " ## %3A = : ## %2C = , ## %0D = \n
   
-  URL.PREFIX <- "http://amigo.geneontology.org/cgi-bin/amigo/visualize?inline=true&term_data={%0D"
+  URL.PREFIX <- "http://amigo.geneontology.org/cgi-bin/amigo/visualize?inline=false&term_data={%0D"
   URL.SUFFIX <- paste("%0D%20}&format=",picType,"&mode=",modeType,"&term_data_type=json",sep="")
   
   goSplit <- t(sapply(strsplit(goIDs,":"),function(x)x))

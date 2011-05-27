@@ -1,5 +1,5 @@
-\name{RamiGO}
-\alias{RamiGO}
+\name{getAmigoTree}
+\alias{getAmigoTree}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Getting the DAG GO tree for a set of GO ID's.
@@ -54,7 +54,5 @@ RamiGO(picType = "png", modeType = "basic", goIDs = NULL, color = NULL, filename
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+getAmigoTree(goIDs=c("GO:0051130","GO:0019912","GO:0005783"),color=c("lightblue","red","yellow"))
 }

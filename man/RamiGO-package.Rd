@@ -25,12 +25,11 @@ Markus Schroeder
 Maintainer: Markus Schroeder <mschroed@jimmy.harvard.edu>
 }
 \references{
-~~ Literature or other references for background information ~~
+Gene Ontology: tool for the unification of biology. The Gene Ontology Consortium (2000) Nature Genet. 25: 25-29
+
+http://amigo.geneontology.org/cgi-bin/amigo/go.cgi
 }
 \seealso{
-~~ Optional links to other man pages, e.g. ~~
-~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
-}
-\examples{
-~~ simple examples of the most important functions ~~
+## ~~ Optional links to other man pages, e.g. ~~
+## ~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
 }
