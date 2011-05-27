@@ -1,10 +1,10 @@
-Package: anRpackage
+Package: RamiGO
 Type: Package
-Title: What the package does (short line)
-Version: 1.0
+Title: amiGO R interface
+Version: 0.1
 Date: 2011-05-27
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Author: Markus Schroeder
+Maintainer: Markus Schroeder <mschroed@jimmy.harvard.edu>
+Description: R interface sending requests to amiGO and retrieving DAG GO trees
+License: Artistic-2.0
 LazyLoad: yes

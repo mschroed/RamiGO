@@ -1,0 +1,81 @@
+%\VignetteIndexEntry{RamiGO: An Introduction (HowTo)}
+%\VignetteDepends{}
+%\VignetteSuggests{}
+%\VignetteImports{}
+%\VignettePackage{RamiGO}
+
+%documentclass[12pt, a4paper]{article}
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{times}
+\usepackage{hyperref}
+\usepackage[numbers]{natbib}
+\usepackage[american]{babel}
+\usepackage{authblk}
+%\renewcommand\Authfont{\scshape
+\renewcommand\Affilfont{\itshape\small}
+\usepackage{Sweave}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\textfraction}{0.1}
+%\usepackage{tikz}
+
+
+\textwidth=6.2in
+\textheight=8.5in
+%\parskip=.3cm
+\oddsidemargin=.1in
+\evensidemargin=.1in
+\headheight=-.3in
+
+%------------------------------------------------------------
+% newcommand
+%------------------------------------------------------------
+\newcommand{\scscst}{\scriptscriptstyle}
+\newcommand{\scst}{\scriptstyle}
+\newcommand{\Robject}[1]{{\texttt{#1}}}
+\newcommand{\Rfunction}[1]{{\texttt{#1}}}
+\newcommand{\Rclass}[1]{\textit{#1}}
+\newcommand{\Rpackage}[1]{\textit{#1}}
+\newcommand{\Rexpression}[1]{\texttt{#1}}
+\newcommand{\Rmethod}[1]{{\texttt{#1}}}
+\newcommand{\Rfunarg}[1]{{\texttt{#1}}}
+
+
+
+\begin{document}
+
+%------------------------------------------------------------
+\title{\Rpackage{RamiGO}: an R interface for amiGO.}
+%------------------------------------------------------------
+\author[1,2]{Markus Schr\"{o}der}
+
+\affil[1]{Biostatistics and Computational Biology, Dana-Farber Cancer Institute, Harvard School of Public Health, Boston, USA}
+\affil[5]{Computational Genomics, Center for Biotechnology, Bielefeld University, Germany}
+
+\SweaveOpts{highlight=TRUE, tidy=TRUE, keep.space=TRUE, keep.blank.space=FALSE, keep.comment=TRUE}
+
+%<<setup,echo=FALSE>>=
+%library(pgfSweave)
+%setCacheDir("cache")
+%options(keep.source=TRUE)
+%@
+
+\maketitle
+\tableofcontents
+
+%------------------------------------------------------------
+\section{Introduction}
+%------------------------------------------------------------ 
+
+The \Rpackage{RamiGO} package is providing functions to interact with amiGO and retrieving GO trees in various formats.
+
+\newpage
+%------------------------------------------------------------
+\section{Session Info}
+%------------------------------------------------------------ 
+<<sessionInfo,echo=FALSE,results=tex>>==
+toLatex(sessionInfo())
+@
+
+\end{document}
