@@ -5,7 +5,7 @@ RamiGO <- function(picType = "png", modeType = "basic", goIDs = NULL, color = NU
   if(!is.null(color) && length(goIDs) != length(color)){
     stop("RamiGO: Length of GO ID's and colors differ!")
   }
-  if(picType != "png" || picType != "svg" || picType != "dot"){
+  if(picType != "png" && picType != "svg" && picType != "dot"){
     stop("RamiGO: Currently only png, svg and dot are supported! (not svg_raw and navi)")
   }
   if(modeType != "basic"){
@@ -21,8 +21,12 @@ RamiGO <- function(picType = "png", modeType = "basic", goIDs = NULL, color = NU
   URL.PREFIX <- "http://amigo.geneontology.org/cgi-bin/amigo/visualize?inline=true&term_data={%0D"
   URL.SUFFIX <- paste("%0D%20}&format=",picType,"&mode=",modeType,"&term_data_type=json",sep="")
   
-  goSplit <- t(sapply(strsplit(giIDs[[i]],":"),function(x)x))
-  URL.DATA <- paste('%22',goSplit[,1],'%3A',goSplit[,2],'%22%3A{%22fill%22%3A%20%20%22',color,'%22}%2C%20%0D',sep='',collapse="")
+  goSplit <- t(sapply(strsplit(goIDs,":"),function(x)x))
+  if(!is.null(color)){
+    URL.DATA <- paste('%22',goSplit[,1],'%3A',goSplit[,2],'%22%3A{%22fill%22%3A%20%20%22',color,'%22}%2C%20%0D',sep='',collapse="")
+  } else {
+    URL.DATA <- paste('%22',goSplit[,1],'%3A',goSplit[,2],'%22%3A{%22fill%22%3A%20%20%22lightblue%22}%2C%20%0D',sep='',collapse="")
+  }
   URL.REQ <- paste(URL.PREFIX,substr(URL.DATA,1,nchar(URL.DATA)-9),URL.SUFFIX,sep="")
   download.file(url=URL.REQ,destfile=filename)
 }
