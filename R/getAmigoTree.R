@@ -6,10 +6,10 @@ getAmigoTree <- function(picType = "png", modeType = "basic", goIDs = NULL, colo
     stop("RamiGO: Length of GO ID's and colors differ!")
   }
   if(picType != "png" && picType != "svg" && picType != "dot"){
-    stop("RamiGO: Currently only png, svg and dot are supported! (not svg_raw and navi)")
+    stop("RamiGO: Currently only picType: png, svg and dot are supported! (not svg_raw and navi)")
   }
   if(modeType != "basic"){
-    stop("RamiGO: Currently only basic is supported! (not quickgo, single, multi or advanced)")
+    stop("RamiGO: Currently only modeType: basic is supported! (not quickgo, single, multi or advanced)")
   }
   if(is.null(filename)){
     filename <- sprintf("RamiGO.%s",picType)
