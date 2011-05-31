@@ -68,7 +68,7 @@
 \section{Introduction}
 %------------------------------------------------------------ 
 
-The \Rpackage{RamiGO} package is providing functions to interact with amiGO and retrieving GO trees in various formats.
+The \Rpackage{RamiGO} package is providing functions to interact with amiGO and retrieving GO trees in various formats. The most common requests would be as png or svg. 
 
 \newpage
 %------------------------------------------------------------
