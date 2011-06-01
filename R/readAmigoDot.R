@@ -1,5 +1,5 @@
-read.amigo.dot <- function(filename=NULL) {
-  if(is.null(filename)){ stop("read.amigo.dot: No file specified!") }
+readAmigoDot <- function(filename=NULL) {
+  if(is.null(filename)){ stop("readAmigoDot: No file specified!") }
   
   ## read dot file
   inputData <- readLines(filename);
@@ -9,7 +9,6 @@ read.amigo.dot <- function(filename=NULL) {
   nodeData <- inputData[grep("\tnode[\\d]+\\s->\\snode[\\d]+\\s\\[",inputData,perl=TRUE)]
   
   ## get meta data
-##  metaDataValues <- sapply(t(metaData),function(x)strapply(x, '(node[\\d]+).*(GO:[\\d]+)<br/>(.+)</TD>.*,\\scolor=.(#.+).,\\sfillcolor="([#.{6}]?[a-zA-Z]?)[\\"]?,\\sfontcolor=.(#.+).\\];', c, backref = -6))
   metaDataValues <- sapply(t(metaData),function(x)strapply(x, '(node[\\d]+).*(GO:[\\d]+)<br/>(.+)</TD>.*,\\scolor=["]?(#.+[^"]|.+[^"])["]?,\\sfillcolor=["]?(#.+[^"]|.+[^"])["]?,\\sfontcolor=["]?(#.+[^"]|.+[^"])["]?];', c, backref = -6))
   annot <- NULL
   for(i in 1:6){
@@ -17,7 +16,8 @@ read.amigo.dot <- function(filename=NULL) {
   }
   annot <- as.data.frame(annot,stringsAsFactors=FALSE)
   names(annot) <- c("node","GO_ID","description","color","fillcolor","fontcolor")
-   
+  annot[,"description"] <- as.character(sapply(annot[,"description"],function(x)paste(strsplit(x,"\\s*\\<br \\/\\>\\s*",perl=TRUE)[[1]],collapse=" ")))
+  
   ## get relations between nodes
   nodeDataValues <-  sapply(nodeData,function(x)strapply(x, "\t(node[\\d]+) -> (node[\\d]+) \\[arrowhead=(.+), arrowtail=(.+), color=(.+), style=(.+)\\];", c, backref = -6))
   relations <- NULL

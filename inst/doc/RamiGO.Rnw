@@ -1,7 +1,7 @@
 %\VignetteIndexEntry{RamiGO: An Introduction (HowTo)}
-%\VignetteDepends{}
+%\VignetteDepends{gsubfn}
 %\VignetteSuggests{}
-%\VignetteImports{}
+%\VignetteImports{igraph}
 %\VignettePackage{RamiGO}
 
 %documentclass[12pt, a4paper]{article}
@@ -46,9 +46,9 @@
 \begin{document}
 
 %------------------------------------------------------------
-\title{\Rpackage{RamiGO}: an R interface for amiGO.}
+\title{\Rpackage{RamiGO}: an R interface for amiGO}
 %------------------------------------------------------------
-\author[1,2]{Markus Schr\"{o}der}
+\author[1,2]{*}
 
 \affil[1]{Biostatistics and Computational Biology, Dana-Farber Cancer Institute, Harvard School of Public Health, Boston, USA}
 \affil[5]{Computational Genomics, Center for Biotechnology, Bielefeld University, Germany}
@@ -68,7 +68,50 @@
 \section{Introduction}
 %------------------------------------------------------------ 
 
-The \Rpackage{RamiGO} package is providing functions to interact with amiGO and retrieving GO trees in various formats. The most common requests would be as png or svg. 
+The \Rpackage{RamiGO} package is providing functions to interact with amiGO and retrieving GO (Gene Ontology) trees in various formats. The most common requests would be as png or svg. RamiGO also provides a parser for the GraphViz DOT format that returns a graph object and meta data.
+
+%------------------------------------------------------------
+\section{Getting started}
+%------------------------------------------------------------ 
+The DOT format parser uses the strapply() function from the gsubfn package that has to be installed on your system.
+
+<<loadpackages>>=
+library(RamiGO)
+library(gsubfn)
+strapply(c("node25 -> node30"), "node([\\d]+) -> node([\\d]+)", c, backref = -2)
+@
+
+%------------------------------------------------------------
+\section{Example}
+%------------------------------------------------------------ 
+The RamiGO package currently provides two functions that enable the user to retrieve directed acyclic trees from amiGO and parse the GraphViz DOT format. An example on how to use the functions is given below.
+
+To retrieve a tree from amiGO, the user has to provide a vector of GO ID's. For example GO:0051130, GO:0019912, GO:0005783, GO:0043229 and GO:0050789. These GO ID's represent entries from the three GO categories: Biological Process, Molecular Function and Cellular Component. The given GO ID's can be highlighted with different colors within the tree, therefor the user has to provide a vector of colors for each GO ID. A request could look like this:
+
+<<getAmigoTreePNG>>=
+getAmigoTree(picType="png", goIDs=c("GO:0051130","GO:0019912","GO:0005783","GO:0043229","GO:0050789"), color=c("lightblue","red","yellow","green","pink"), filename="example")
+@
+
+The GO tree representing the given GO ID's is dowloaded to the file "example.png"; the file extension is created automatically according to picType. The request for a svg file is similar:
+
+<<getAmigoTreeSVG>>=
+getAmigoTree(picType="svg", goIDs=c("GO:0051130","GO:0019912","GO:0005783","GO:0043229","GO:0050789"), color=c("lightblue","red","yellow","green","pink"), filename="example")
+@
+
+In order to further analyze the tree, amiGO provides the possibility to retrieve the tree in the GraphViz DOT format. The function readAmigoTree parses these DOT format files and returns multiple objects. A graph object, an adjacency matrix representing the graph, a data.frame with the annotation for each node, the relations (edges) between the nodes and a data.frame with the leaves of the tree and their annotation. An example could look like this:
+
+
+<<getAmigoTreeDOT>>=
+getAmigoTree(picType="dot", goIDs=c("GO:0051130","GO:0019912","GO:0005783","GO:0043229","GO:0050789"), color=c("lightblue","red","yellow","green","pink"), filename="example")
+tt <- readAmigoDot("example.dot")
+str(tt)
+@
+
+The leaves of the tree are:
+
+<<leaves>>=
+tt$leaves[,c("node","GO_ID","description")]
+@
 
 \newpage
 %------------------------------------------------------------

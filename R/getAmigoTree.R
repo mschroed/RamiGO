@@ -13,6 +13,10 @@ getAmigoTree <- function(picType = "png", modeType = "basic", goIDs = NULL, colo
   }
   if(is.null(filename)){
     filename <- sprintf("RamiGO.%s",picType)
+  } else {
+    if(rev(strsplit(filename,"\\.")[[1]])[1] != picType){
+      filename <- sprintf("%s.%s",filename,picType)
+    }
   }
   
   ## write results out for amigo

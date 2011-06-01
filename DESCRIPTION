@@ -5,6 +5,8 @@ Version: 0.1
 Date: 2011-05-27
 Author: Markus Schroeder
 Maintainer: Markus Schroeder <mschroed@jimmy.harvard.edu>
-Description: R interface sending requests to amiGO and retrieving DAG GO trees
+Description: R interface sending requests to amiGO, retrieving DAG GO trees and parsing GraphViz DOT format files
 License: Artistic-2.0
 LazyLoad: yes
+Depends: gsubfn
+Imports: igraph
