@@ -18,6 +18,9 @@ getAmigoTree <- function(picType = "png", modeType = "basic", goIDs = NULL, colo
       filename <- sprintf("%s.%s",filename,picType)
     }
   }
+  if(is.null(color)){
+    color <- rep("white",length(goIDs))
+  }
   
   ## write results out for amigo
   ## %22 = " ## %3A = : ## %2C = , ## %0D = \n

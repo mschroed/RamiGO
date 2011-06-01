@@ -27,6 +27,12 @@ readAmigoDot <- function(filename=NULL) {
   relations <- as.data.frame(relations,stringsAsFactors=FALSE)
   names(relations) <- c("parent","child","arrowhead","arrowtail","color","style")
   
+  ## sort edges
+  parentList <- as.numeric(sapply(relations[,"parent"],function(x)substr(x,5,nchar(x))))
+  childList <- as.numeric(sapply(relations[,"child"],function(x)substr(x,5,nchar(x))))
+  relationsOrder <- order(parentList,childList)
+  relations <- relations[relationsOrder,]
+  
   ## create adjacency matrix
   graph <- matrix(0,nrow(annot),nrow(annot),dimnames=list(annot[,"node"],annot[,"node"]))
   for(i in 1:nrow(relations)){
