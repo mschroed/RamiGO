@@ -35,7 +35,11 @@ Markus Schroeder <mschroed@jimmy.harvard.edu>
 Benjamin Haibe-Kains <bhaibeka@jimmy.harvard.edu>
 }
 \examples{
-## TODO
+library(RamiGO)
+library(igraph)
+getAmigoTree(goIDs=c("GO:0051130","GO:0019912","GO:0005783"),color=c("lightblue","red","yellow"),picType="dot",filename="example.dot")
+tt <- readAmigoDot("example.dot")
+adjM2gml(tt$adjMatrix,tt$relations$color,tt$annot$fillcolor,tt$annot$GO_ID,tt$annot$description,"example")
 }
 \keyword{ igraph }
 \keyword{ graph }
