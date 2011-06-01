@@ -1,4 +1,4 @@
-read.amigo.dot <- function(filename=NULL, ...) {
+read.amigo.dot <- function(filename=NULL) {
   if(is.null(filename)){ stop("read.amigo.dot: No file specified!") }
   
   ## read dot file
@@ -9,13 +9,14 @@ read.amigo.dot <- function(filename=NULL, ...) {
   nodeData <- inputData[grep("\tnode[\\d]+\\s->\\snode[\\d]+\\s\\[",inputData,perl=TRUE)]
   
   ## get meta data
-  metaDataValues <- sapply(t(metaData),function(x)strapply(x, "(node[\\d]+).*(GO:[\\d]+)<br/>(.+)</TD>.*color=.(#.+)..\\sfill", c, backref = -4))
+##  metaDataValues <- sapply(t(metaData),function(x)strapply(x, '(node[\\d]+).*(GO:[\\d]+)<br/>(.+)</TD>.*,\\scolor=.(#.+).,\\sfillcolor="([#.{6}]?[a-zA-Z]?)[\\"]?,\\sfontcolor=.(#.+).\\];', c, backref = -6))
+  metaDataValues <- sapply(t(metaData),function(x)strapply(x, '(node[\\d]+).*(GO:[\\d]+)<br/>(.+)</TD>.*,\\scolor=["]?(#.+[^"]|.+[^"])["]?,\\sfillcolor=["]?(#.+[^"]|.+[^"])["]?,\\sfontcolor=["]?(#.+[^"]|.+[^"])["]?];', c, backref = -6))
   annot <- NULL
-  for(i in 1:4){
+  for(i in 1:6){
     annot <- cbind(annot,as.character(sapply(metaDataValues,function(x)x[i])))
   }
   annot <- as.data.frame(annot,stringsAsFactors=FALSE)
-  names(annot) <- c("node","GO_ID","description","color")
+  names(annot) <- c("node","GO_ID","description","color","fillcolor","fontcolor")
    
   ## get relations between nodes
   nodeDataValues <-  sapply(nodeData,function(x)strapply(x, "\t(node[\\d]+) -> (node[\\d]+) \\[arrowhead=(.+), arrowtail=(.+), color=(.+), style=(.+)\\];", c, backref = -6))
@@ -31,5 +32,11 @@ read.amigo.dot <- function(filename=NULL, ...) {
   for(i in 1:nrow(relations)){
     graph[relations[i,"parent"],relations[i,"child"]] <- 1
   }
-  return(list("graph"=graph,"annot"=annot,"relations"=relations);
+  adjMatrix <- graph
+  graph <- graph.adjacency(graph,mode="directed")
+  
+  ## get leaves
+  leaves <- annot[!annot[,"node"]%in%unique(relations[,"parent"]),]
+  
+  return(list("graph"=graph,"adjMatrix"=adjMatrix,"annot"=annot,"relations"=relations,"leaves"=leaves))
 }
