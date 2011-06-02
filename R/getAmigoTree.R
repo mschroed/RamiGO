@@ -18,22 +18,22 @@ getAmigoTree <- function(picType = "png", modeType = "basic", goIDs = NULL, colo
       filename <- sprintf("%s.%s",filename,picType)
     }
   }
-  if(is.null(color)){
-    color <- rep("white",length(goIDs))
-  }
-  
+
   ## write results out for amigo
   ## %22 = " ## %3A = : ## %2C = , ## %0D = \n
-  
-  URL.PREFIX <- "http://amigo.geneontology.org/cgi-bin/amigo/visualize?inline=false&term_data={%0D"
-  URL.SUFFIX <- paste("%0D%20}&format=",picType,"&mode=",modeType,"&term_data_type=json",sep="")
-  
-  goSplit <- t(sapply(strsplit(goIDs,":"),function(x)x))
-  if(!is.null(color)){
-    URL.DATA <- paste('%22',goSplit[,1],'%3A',goSplit[,2],'%22%3A{%22fill%22%3A%20%20%22',color,'%22}%2C%20%0D',sep='',collapse="")
+  if(is.null(color)){
+    URL.PREFIX <- "http://amigo.geneontology.org/cgi-bin/amigo/visualize?inline=false&term_data="
+    URL.SUFFIX <- paste("&format=",picType,"&mode=",modeType,"&term_data_type=string",sep="")    
+    goSplit <- t(sapply(strsplit(goIDs,":"),function(x)x))
+    URL.DATA <- paste(goSplit[,1],'%3A',goSplit[,2],'%2C',sep='',collapse="")
+    URL.REQ <- paste(URL.PREFIX,substr(URL.DATA,1,nchar(URL.DATA)-3),URL.SUFFIX,sep="")
+    download.file(url=URL.REQ,destfile=filename)
   } else {
-    URL.DATA <- paste('%22',goSplit[,1],'%3A',goSplit[,2],'%22%3A{%22fill%22%3A%20%20%22lightblue%22}%2C%20%0D',sep='',collapse="")
+    URL.PREFIX <- "http://amigo.geneontology.org/cgi-bin/amigo/visualize?inline=false&term_data={%0D"
+    URL.SUFFIX <- paste("%0D%20}&format=",picType,"&mode=",modeType,"&term_data_type=json",sep="")    
+    goSplit <- t(sapply(strsplit(goIDs,":"),function(x)x))
+    URL.DATA <- paste('%22',goSplit[,1],'%3A',goSplit[,2],'%22%3A{%22fill%22%3A%20%20%22',color,'%22}%2C%20%0D',sep='',collapse="")
+    URL.REQ <- paste(URL.PREFIX,substr(URL.DATA,1,nchar(URL.DATA)-9),URL.SUFFIX,sep="")
+    download.file(url=URL.REQ,destfile=filename)
   }
-  URL.REQ <- paste(URL.PREFIX,substr(URL.DATA,1,nchar(URL.DATA)-9),URL.SUFFIX,sep="")
-  download.file(url=URL.REQ,destfile=filename)
 }
