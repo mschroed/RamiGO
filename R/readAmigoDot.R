@@ -1,8 +1,12 @@
-readAmigoDot <- function(filename=NULL) {
-  if(is.null(filename)){ stop("readAmigoDot: No file specified!") }
-  
-  ## read dot file
-  inputData <- readLines(filename);
+readAmigoDot <- function(filename=NULL,object=NULL) {
+  if(is.null(filename) && is.null(object)){ stop("readAmigoDot: You must provide something!") }
+  if(!is.null(filename)){
+    ## read dot file
+    inputData <- readLines(filename);
+  } else {
+    ## split readAmigoTree output string
+    inputData <- strsplit(object,"\n")[[1]]
+  }
   
   ## split data
   metaData <- inputData[grep("\tnode[\\d]+\\s\\[",inputData,perl=TRUE)]

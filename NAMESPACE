@@ -1,3 +1,5 @@
 exportPattern("^[^\\.]")
 
 import(igraph)
+importFrom(RCurl,postForm)
+importFrom(png,readPNG,writePNG)

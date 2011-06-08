@@ -32,7 +32,8 @@ str(c5.go.mapping)
 terms <- c("CHROMATIN_REMODELING_COMPLEX",
 	"RNA_POLYMERASE_COMPLEX",
 	"CYTOKINESIS","CELL_RECOGNITION")
-id <- sapply(terms,function(x)c5.go.mapping[match(x,c5.go.mapping[,1]),2])
+id <- sapply(terms,function(x)c5.go.mapping[
+  match(x,c5.go.mapping[,1]),2])
 id
 }
 \keyword{datasets}

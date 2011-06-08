@@ -4,29 +4,31 @@
 Create GML file from readAmigoDot output.
 }
 \description{
-Takes part of the output of the readAmigoDot function and creates a GML file by calling exportCytoGML().
+Takes a part of the output of the readAmigoDot function and creates a GML file by calling exportCytoGML().
 }
 \usage{
-adjM2gml(adjMatrix = NULL, edgecolor = NULL, vertexcolor = NULL, nodelabels = NULL, nodedescription = NULL, filename = NULL)
+adjM2gml(adjMatrix = NULL, edgecolor = NULL,
+  vertexcolor = NULL, nodelabels = NULL,
+  nodedescription = NULL, filename = NULL)
 }
 \arguments{
   \item{adjMatrix}{
-	\code{adjMatrix} adjacency matrix, partens in rows, children in cols
+	adjacency matrix, partens in rows, children in cols.
 }
   \item{edgecolor}{
-	\code{edgecolor} character vector of the length of existing edges
+	character vector of the length of existing edges.
 }
   \item{vertexcolor}{
-	\code{vertexcolor} character vector of the length of existing nodes
+	character vector of the length of existing nodes.
 }
   \item{nodelabels}{
-	\code{nodelabels} character vector of the length of existing nodes
+	character vector of the length of existing nodes.
 }
   \item{nodedescription}{
-	\code{nodedescription} character vector of the length of existing nodes
+	character vector of the length of existing nodes.
 }
   \item{filename}{
-	\code{filename} output filenames
+	output filenames.
 }
 }
 \author{
@@ -36,10 +38,19 @@ Benjamin Haibe-Kains <bhaibeka@jimmy.harvard.edu>
 }
 \examples{
 library(RamiGO)
+library(RCurl)
 library(igraph)
-getAmigoTree(goIDs=c("GO:0051130","GO:0019912","GO:0005783"),color=c("lightblue","red","yellow"),picType="dot",filename="example.dot")
-tt <- readAmigoDot("example.dot")
-adjM2gml(tt$adjMatrix,tt$relations$color,tt$annot$fillcolor,tt$annot$GO_ID,tt$annot$description,"example")
+## set GO ID's and color
+goIDs <- c("GO:0051130","GO:0019912","GO:0005783")
+color <- c("lightblue","red","yellow")
+
+dd <- getAmigoTree(goIDs=goIDs,color=color,
+  filename="example",picType="dot",saveResult=FALSE)
+tt <- readAmigoDot(object=dd)
+
+adjM2gml(tt$adjMatrix,tt$relations$color,
+  tt$annot$fillcolor,tt$annot$GO_ID,
+  tt$annot$description,"example")
 }
 \keyword{ igraph }
 \keyword{ graph }

@@ -1,15 +1,22 @@
-getAmigoTree <- function(picType = "png", modeType = "basic", goIDs = NULL, color = NULL, filename = NULL){
+getAmigoTree <- function(goIDs = NULL, color = NULL, filename = NULL, picType = "png", modeType = "advanced", webserver=NULL, saveResult=TRUE){
+  if(is.null(webserver)){
+    webserver <- "http://amigo.geneontology.org/cgi-bin/amigo/visualize"
+  }
   if(is.null(goIDs)){
     stop("RamiGO: You must specifiy GO ID's!")
   }
   if(!is.null(color) && length(goIDs) != length(color)){
-    stop("RamiGO: Length of GO ID's and colors differ!")
+    if(length(color) == 1){
+      color <- rep(color,length(goIDs))
+    } else {
+      stop("RamiGO: Length of GO ID's and colors differ!")
+    }
   }
   if(picType != "png" && picType != "svg" && picType != "dot"){
     stop("RamiGO: Currently only picType: png, svg and dot are supported! (not svg_raw and navi)")
   }
-  if(modeType != "basic"){
-    stop("RamiGO: Currently only modeType: basic is supported! (not quickgo, single, multi or advanced)")
+  if(modeType != "advanced"){
+    stop("RamiGO: Currently only the advanced mode is supported! (not quickgo or single)")
   }
   if(is.null(filename)){
     filename <- sprintf("RamiGO.%s",picType)
@@ -18,22 +25,36 @@ getAmigoTree <- function(picType = "png", modeType = "basic", goIDs = NULL, colo
       filename <- sprintf("%s.%s",filename,picType)
     }
   }
+  termDataType <- ifelse(is.null(color),"string","json")
+  res <- NULL
 
-  ## write results out for amigo
-  ## %22 = " ## %3A = : ## %2C = , ## %0D = \n
   if(is.null(color)){
-    URL.PREFIX <- "http://amigo.geneontology.org/cgi-bin/amigo/visualize?inline=false&term_data="
-    URL.SUFFIX <- paste("&format=",picType,"&mode=",modeType,"&term_data_type=string",sep="")    
-    goSplit <- t(sapply(strsplit(goIDs,":"),function(x)x))
-    URL.DATA <- paste(goSplit[,1],'%3A',goSplit[,2],'%2C',sep='',collapse="")
-    URL.REQ <- paste(URL.PREFIX,substr(URL.DATA,1,nchar(URL.DATA)-3),URL.SUFFIX,sep="")
-    download.file(url=URL.REQ,destfile=filename)
+    termData <- paste(goIDs,sep=",",collapse="")
   } else {
-    URL.PREFIX <- "http://amigo.geneontology.org/cgi-bin/amigo/visualize?inline=false&term_data={%0D"
-    URL.SUFFIX <- paste("%0D%20}&format=",picType,"&mode=",modeType,"&term_data_type=json",sep="")    
-    goSplit <- t(sapply(strsplit(goIDs,":"),function(x)x))
-    URL.DATA <- paste('%22',goSplit[,1],'%3A',goSplit[,2],'%22%3A{%22fill%22%3A%20%20%22',color,'%22}%2C%20%0D',sep='',collapse="")
-    URL.REQ <- paste(URL.PREFIX,substr(URL.DATA,1,nchar(URL.DATA)-9),URL.SUFFIX,sep="")
-    download.file(url=URL.REQ,destfile=filename)
+    termDataTmp <- paste('"',goIDs,'":{"fill": "',color,'"},',sep="",collapse="")
+    termData <- paste('{',substr(termDataTmp,1,nchar(termDataTmp)-1),'}',sep="",collapse="")
   }
+
+  aa <- postForm(webserver,
+    .params=list(
+      term_data=termData,
+      inline="false",
+      format=picType,
+      mode=modeType,
+      term_data_type=termDataType))     
+
+  if(picType == "png"){
+    res <- readPNG(aa)
+    if(saveResult){
+      writePNG(res,filename)
+    }
+  }
+  
+  if(picType == "svg" || picType == "dot"){
+    res <- aa
+    if(saveResult){
+      writeLines(res,filename)
+    }
+  }
+  return(res)
 }

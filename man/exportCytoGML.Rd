@@ -1,20 +1,20 @@
 \name{exportCytoGML}
 \alias{exportCytoGML}
 \title{
-Write out an igraph graph to Cytoscape readable GML file.
+Writes out an igraph graph to a Cytoscape readable GML file.
 }
 \description{
-Takes an igraph object and writes it to a GML file that is readable by Cytoscape.
+Takes the igraph object edited in adjM2gml() and writes it to a GML file that is readable by Cytoscape.
 }
 \usage{
 exportCytoGML(graph, filename)
 }
 \arguments{
   \item{graph}{
-	\code{graph} igraph graph
+	igraph graph (for example from adjM2gml()).
 }
   \item{filename}{
-	\code{filename} output filename
+	output filename.
 }
 }
 \author{
@@ -23,7 +23,21 @@ Markus Schroeder <mschroed@jimmy.harvard.edu>
 Benjamin Haibe-Kains <bhaibeka@jimmy.harvard.edu>
 }
 \examples{
-## todo
+library(RamiGO)
+library(RCurl)
+library(igraph)
+## set GO ID's and color
+goIDs <- c("GO:0051130","GO:0019912","GO:0005783")
+color <- c("lightblue","red","yellow")
+
+dd <- getAmigoTree(goIDs=goIDs,color=color,
+  filename="example",picType="dot",saveResult=FALSE)
+tt <- readAmigoDot(object=dd)
+
+## exportCytoGML is called inside adjM2gml
+adjM2gml(tt$adjMatrix,tt$relations$color,
+  tt$annot$fillcolor,tt$annot$GO_ID,
+  tt$annot$description,"example")
 }
 \keyword{ igraph }
 \keyword{ graph }
