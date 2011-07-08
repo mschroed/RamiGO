@@ -1,9 +1,17 @@
 ## inspire from Gabor Csardi
 ## source: http://tolstoy.newcastle.edu.au/R/e13/help/11/04/10607.html
 exportCytoGML <- function(graph, filename) {	
+  ## check if there is a graph
+  if(missing(graph)){
+    stop("Graph missing.")
+  }
+  ## check if there is a file name
+  if(missing(filename)){
+    filename <- "graph.gml"
+  }
 	fileio <- file(filename, "w")
 	## graph attributes
-	cat("Creator \"igraph exportCytoGML\"\n", file=fileio)
+	cat("Creator \"RamiGO exportCytoGML\"\n", file=fileio)
 	cat("Version 1.0\n", file=fileio)
 	cat("graph\t[\n", file=fileio)
 	cat("\tdirected", as.integer(is.directed(graph)), "\n", file=fileio)

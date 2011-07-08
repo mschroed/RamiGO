@@ -4,17 +4,17 @@
 Parser for the GraphViz DOT format.
 }
 \description{
-Reads DOT file or takes the output of getAmigoTree (with picType="dot")and returns a graph, adjacency matrix, edges and leaves and also the annotation for the nodes.
+Reads DOT file or takes the output of getAmigoTree (with picType="dot") and returns a graph, adjacency matrix, edges and leaves and also the annotation for the nodes.
 }
 \usage{
-readAmigoDot(filename = NULL, object = NULL)
+readAmigoDot(object, filename)
 }
 \arguments{
-  \item{filename}{
-	A .dot file in DOT format.
-}
   \item{object}{
 	A newline separated string in DOT format (as returned by getAmigoTree).
+}
+  \item{filename}{
+	A .dot file in DOT format.
 }
 }
 \value{
@@ -28,9 +28,6 @@ readAmigoDot(filename = NULL, object = NULL)
 Markus Schroeder <mschroed@jimmy.harvard.edu>
 }
 \examples{
-library(RCurl)
-library(gsubfn)
-
 ## set GO ID's and color
 goIDs <- c("GO:0051130","GO:0019912","GO:0005783")
 color <- c("lightblue","red","yellow")
@@ -44,6 +41,6 @@ tt1 <- readAmigoDot(filename="example.dot")
 tt2 <- readAmigoDot(object=dd)
 
 ## look at results
-str(tt1)
-str(tt2)
+show(tt1)
+show(tt2)
 }

@@ -2,17 +2,17 @@
 \alias{RamiGO}
 \docType{package}
 \title{
-AmiGO R interface
+AmiGO visualize R interface
 }
 \description{
-R interface sending requests to AmiGO, retrieving DAG GO trees, parsing GraphViz DOT format files and exporting GML files for Cytoscape.
+R interface sending requests to AmiGO visualize, retrieving DAG GO trees, parsing GraphViz DOT format files and exporting GML files for Cytoscape.
 }
 \details{
 \tabular{ll}{
 Package: \tab RamiGO\cr
 Type: \tab Package\cr
-Version: \tab 0.2\cr
-Date: \tab 2011-06-08\cr
+Version: \tab \Sexpr{packageDescription("RamiGO")$Version}\cr
+Date: \tab \Sexpr{packageDescription("RamiGO")$Date}\cr
 License: \tab Artistic-2.0\cr
 LazyLoad: \tab yes\cr
 }

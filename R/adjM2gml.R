@@ -1,13 +1,17 @@
 ## function to export a network to a Cytoscape importable gml file
 ## object: adjacency matrix
 ## returns a cytoscape importable object
-adjM2gml <- function(adjMatrix=NULL, edgecolor=NULL, vertexcolor=NULL, nodelabels=NULL, nodedescription=NULL, filename=NULL) {
+adjM2gml <- function(adjMatrix, edgecolor, vertexcolor, nodelabels, nodedescription, filename) {
 	## adjacency matrix representing the topology; parents in rows, children in columns
-	net.topo <- adjMatrix
-	if(any(dim(net.topo) <= 0)) { stop("network should contain at least one node!") }
+	if(any(dim(adjMatrix) <= 0)) { stop("Network should contain at least one node!") }
+	
+	## check filename
+	if(missing(filename)){
+    filename <- "graph"
+  }
 	
 	## create igraph object
-	net.igraph <- graph.adjacency(adjmatrix=net.topo, mode="directed")
+	net.igraph <- graph.adjacency(adjmatrix=adjMatrix, mode="directed")
 	
 	## convert colors into hex
 	convCol <- function(x){
@@ -16,7 +20,7 @@ adjM2gml <- function(adjMatrix=NULL, edgecolor=NULL, vertexcolor=NULL, nodelabel
   }
 	
   ## colors for the edges
-	if(!is.null(edgecolor)){
+	if(!missing(edgecolor)){
     ccSelect <- regexpr("#",edgecolor) < 0
     ccData <- edgecolor[ccSelect]
     if(length(ccData) != 0){
@@ -29,19 +33,19 @@ adjM2gml <- function(adjMatrix=NULL, edgecolor=NULL, vertexcolor=NULL, nodelabel
   }
     
   ## node labels
-  if(!is.null(nodelabels)){
+  if(!missing(nodelabels)){
     V(net.igraph)$name <- sprintf('"%s"',nodelabels)
   } else {
     V(net.igraph)$name <- sprintf('"%s"',V(net.igraph)$name)
   }
   
   ## node description
-  if(!is.null(nodedescription)){
+  if(!missing(nodedescription)){
     V(net.igraph)$description <- sprintf('"%s"',nodedescription)
   }
   
   ## colors for the vertexes
-  if(!is.null(vertexcolor)){
+  if(!missing(vertexcolor)){
     ccSelect <- regexpr("#",vertexcolor) < 0
     ccData <- vertexcolor[ccSelect]
     if(length(ccData) != 0){

@@ -7,13 +7,12 @@ Create GML file from readAmigoDot output.
 Takes a part of the output of the readAmigoDot function and creates a GML file by calling exportCytoGML().
 }
 \usage{
-adjM2gml(adjMatrix = NULL, edgecolor = NULL,
-  vertexcolor = NULL, nodelabels = NULL,
-  nodedescription = NULL, filename = NULL)
+adjM2gml(adjMatrix, edgecolor, vertexcolor,
+  nodelabels, nodedescription, filename)
 }
 \arguments{
   \item{adjMatrix}{
-	adjacency matrix, partens in rows, children in cols.
+	adjacency matrix, parents in rows, children in cols.
 }
   \item{edgecolor}{
 	character vector of the length of existing edges.
@@ -37,9 +36,6 @@ Markus Schroeder <mschroed@jimmy.harvard.edu>
 Benjamin Haibe-Kains <bhaibeka@jimmy.harvard.edu>
 }
 \examples{
-library(RamiGO)
-library(RCurl)
-library(igraph)
 ## set GO ID's and color
 goIDs <- c("GO:0051130","GO:0019912","GO:0005783")
 color <- c("lightblue","red","yellow")
@@ -48,9 +44,9 @@ dd <- getAmigoTree(goIDs=goIDs,color=color,
   filename="example",picType="dot",saveResult=FALSE)
 tt <- readAmigoDot(object=dd)
 
-adjM2gml(tt$adjMatrix,tt$relations$color,
-  tt$annot$fillcolor,tt$annot$GO_ID,
-  tt$annot$description,"example")
+adjM2gml(adjMatrix(tt),relations(tt)$color,
+  annot(tt)$fillcolor,annot(tt)$GO_ID,
+  annot(tt)$description,"example")
 }
 \keyword{ igraph }
 \keyword{ graph }

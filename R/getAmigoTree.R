@@ -1,34 +1,34 @@
-getAmigoTree <- function(goIDs = NULL, color = NULL, filename = NULL, picType = "png", modeType = "advanced", webserver=NULL, saveResult=TRUE){
-  if(is.null(webserver)){
+getAmigoTree <- function(goIDs, color, filename, picType = "png", modeType = "advanced", webserver, saveResult=TRUE){
+  if(missing(webserver)){
     webserver <- "http://amigo.geneontology.org/cgi-bin/amigo/visualize"
   }
-  if(is.null(goIDs)){
-    stop("RamiGO: You must specifiy GO ID's!")
+  if(missing(goIDs)){
+    stop("getAmigoTree: You must specifiy GO ID's!")
   }
-  if(!is.null(color) && length(goIDs) != length(color)){
+  if(!missing(color) && length(goIDs) != length(color)){
     if(length(color) == 1){
       color <- rep(color,length(goIDs))
     } else {
-      stop("RamiGO: Length of GO ID's and colors differ!")
+      stop("getAmigoTree: Length of GO ID's and colors differ!")
     }
   }
   if(picType != "png" && picType != "svg" && picType != "dot"){
-    stop("RamiGO: Currently only picType: png, svg and dot are supported! (not svg_raw and navi)")
+    stop("getAmigoTree: Currently only picType: png, svg and dot are supported! (not svg_raw and navi)")
   }
   if(modeType != "advanced"){
-    stop("RamiGO: Currently only the advanced mode is supported! (not quickgo or single)")
+    stop("getAmigoTree: Currently only the advanced mode is supported! (not quickgo or single)")
   }
-  if(is.null(filename)){
+  if(missing(filename)){
     filename <- sprintf("RamiGO.%s",picType)
   } else {
     if(rev(strsplit(filename,"\\.")[[1]])[1] != picType){
       filename <- sprintf("%s.%s",filename,picType)
     }
   }
-  termDataType <- ifelse(is.null(color),"string","json")
+  termDataType <- ifelse(missing(color),"string","json")
   res <- NULL
 
-  if(is.null(color)){
+  if(missing(color)){
     termData <- paste(goIDs,sep=",",collapse="")
   } else {
     termDataTmp <- paste('"',goIDs,'":{"fill": "',color,'"},',sep="",collapse="")

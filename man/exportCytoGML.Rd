@@ -23,9 +23,6 @@ Markus Schroeder <mschroed@jimmy.harvard.edu>
 Benjamin Haibe-Kains <bhaibeka@jimmy.harvard.edu>
 }
 \examples{
-library(RamiGO)
-library(RCurl)
-library(igraph)
 ## set GO ID's and color
 goIDs <- c("GO:0051130","GO:0019912","GO:0005783")
 color <- c("lightblue","red","yellow")
@@ -35,9 +32,9 @@ dd <- getAmigoTree(goIDs=goIDs,color=color,
 tt <- readAmigoDot(object=dd)
 
 ## exportCytoGML is called inside adjM2gml
-adjM2gml(tt$adjMatrix,tt$relations$color,
-  tt$annot$fillcolor,tt$annot$GO_ID,
-  tt$annot$description,"example")
+adjM2gml(adjMatrix(tt),relations(tt)$color,
+  annot(tt)$fillcolor,annot(tt)$GO_ID,
+  annot(tt)$description,"example")
 }
 \keyword{ igraph }
 \keyword{ graph }

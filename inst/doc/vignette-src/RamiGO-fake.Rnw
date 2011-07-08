@@ -1,7 +1,0 @@
-\documentclass[10pt]{article}
-%\VignetteIndexEntry{RamiGO}
-%\VignetteDepends{RamiGO}
-%\VignetteKeywords{RamiGO}
-%\VignettePackage{RamiGO}
-\begin{document}
-\end{document}

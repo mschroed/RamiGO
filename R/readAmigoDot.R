@@ -1,6 +1,8 @@
-readAmigoDot <- function(filename=NULL,object=NULL) {
-  if(is.null(filename) && is.null(object)){ stop("readAmigoDot: You must provide something!") }
-  if(!is.null(filename)){
+readAmigoDot <- function(object,filename) {
+  if(missing(object)){
+    stop("readAmigoDot: Object with DOT file content is missing!")
+  }
+  if(!missing(filename)){
     ## read dot file
     inputData <- readLines(filename);
   } else {
@@ -48,5 +50,5 @@ readAmigoDot <- function(filename=NULL,object=NULL) {
   ## get leaves
   leaves <- annot[!annot[,"node"]%in%unique(relations[,"parent"]),]
   
-  return(list("graph"=graph,"adjMatrix"=adjMatrix,"annot"=annot,"relations"=relations,"leaves"=leaves))
+  return(new("AmigoDot", agraph=graph, adjMatrix=adjMatrix, annot=annot, relations=relations, leaves=leaves))
 }

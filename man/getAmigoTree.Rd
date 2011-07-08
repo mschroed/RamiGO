@@ -7,9 +7,8 @@ Getting the DAG GO tree for a set of GO ID's.
 Getting the DAG GO tree for a set of GO ID's from AmiGO. Saves it as a png, svg or dot file. Returns the webserver response as a string.
 }
 \usage{
-getAmigoTree(goIDs = NULL, color = NULL,
-  filename = NULL, picType = "png",
-  modeType = "advanced", webserver=NULL, saveResult=TRUE)
+getAmigoTree(goIDs, color, filename, picType = "png",
+  modeType = "advanced", webserver, saveResult=TRUE)
 }
 \arguments{
   \item{goIDs}{
@@ -46,9 +45,6 @@ The edge colors in the tree represent the relationship between two nodes. In par
 Markus Schroeder <mschroed@jimmy.harvard.edu>
 }
 \examples{
-library(RamiGO)
-library(RCurl)
-library(png)
 ## set GO ID's and color
 goIDs <- c("GO:0051130","GO:0019912","GO:0005783")
 color <- c("lightblue","red","yellow")

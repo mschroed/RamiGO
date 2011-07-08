@@ -1,5 +1,7 @@
 exportPattern("^[^\\.]")
 
 import(igraph)
+import(methods)
 importFrom(RCurl,postForm)
 importFrom(png,readPNG,writePNG)
+exportClasses(AmigoDot)

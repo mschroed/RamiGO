@@ -20,8 +20,6 @@ This object provides a mapping for MSigDB GO terms for the bp, mf and cc GO cate
 \references{
 Subramanian A, Tamayo P, Mootha VK, Mukherjee S, Ebert BL, Gillette MA, Paulovich A, Pomeroy SL, Golub TR, Lander ES, Mesirov JP. Gene set enrichment analysis: A knowledge-based approach for interpreting genome-wide expression profiles. \emph{Proceedings of the National Academy of Sciences of the United States of America} 2005 Oct;\bold{102}(43):15545 -15550.}
 \examples{
-## load RamiGO package
-library(RamiGO)
 ## load the mapping
 data(c5.go.mapping)
 
