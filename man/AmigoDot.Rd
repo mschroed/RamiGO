@@ -6,6 +6,7 @@
 \alias{relations}
 \alias{leaves}
 
+
 \title{AmigoDot constructor and accessors}
 
 \description{
@@ -13,16 +14,17 @@
 }
 
 \usage{
-agraph(object, ...)
-adjMatrix(object, ...)
-annot(object, ...)
-relations(object, ...)
-leaves(object, ...)
+agraph(object)
+adjMatrix(object)
+annot(object)
+relations(object)
+leaves(object)
 }
 
 \arguments{
+  \item{object}{An AmigoDot S4 object}
 
-  \item{agraph}{An igraph object}
+  \item{agraph}{An igraph object.}
 
   \item{adjMatrix}{An adjacency matrix.}
 
@@ -38,7 +40,6 @@ leaves(object, ...)
 }
 
 \value{
-
   \item{AmigoDot}{Object of class
     \code{\linkS4class{AmigoDot}}.}
 
@@ -49,12 +50,11 @@ leaves(object, ...)
   \item{annot, leaves}{Annotation for each node.}
 
   \item{relations}{Meta information about the edges between nodes.}
-
 }
 
 \author{Markus Schroeder \url{mschroed@jimmy.harvard.edu}}
 
-\seealso{\code{\linkS4class{AmigoDot}-class}}
+\seealso{\code{\linkS4class{AmigoDot}-class} \code{\link[igraph:igraph]{igraph}}}
 
 \examples{
 ## set GO ID's and color

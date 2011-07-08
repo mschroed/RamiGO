@@ -4,7 +4,7 @@
 Parser for the GraphViz DOT format.
 }
 \description{
-Reads DOT file or takes the output of getAmigoTree (with picType="dot") and returns a graph, adjacency matrix, edges and leaves and also the annotation for the nodes.
+Reads DOT file or takes the output of getAmigoTree (with picType="dot") and returns an AmigoDot S4 object with a graph, adjacency matrix, edges and leaves and also the annotation for the nodes.
 }
 \usage{
 readAmigoDot(object, filename)
@@ -18,11 +18,7 @@ readAmigoDot(object, filename)
 }
 }
 \value{
-\item{graph }{A graph object}
-\item{adjMatrix }{An adjacency matrix}
-\item{annot }{The node annotation}
-\item{relations }{The edges of the graph}
-\item{leaves }{The leaves of the graph}
+\item{}{An AmigoDot S4 object.}
 }
 \author{
 Markus Schroeder <mschroed@jimmy.harvard.edu>
@@ -37,10 +33,10 @@ dd <- getAmigoTree(goIDs=goIDs,color=color,
   filename="example",picType="dot",saveResult=TRUE)
 
 ## parse file or object
-tt1 <- readAmigoDot(filename="example.dot")
+##tt1 <- readAmigoDot(filename="example.dot")
 tt2 <- readAmigoDot(object=dd)
 
 ## look at results
-show(tt1)
+##show(tt1)
 show(tt2)
 }

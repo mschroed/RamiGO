@@ -50,9 +50,9 @@
 %------------------------------------------------------------
 \title{\Rpackage{RamiGO}: an R interface for AmiGO}
 %------------------------------------------------------------
-\author[1,2]{Markus Schr\"{o}der}
+\author[1,2]{Markus S. Schr\"{o}der}
 \author[1]{Daniel Gusenleitner}
-\author[1]{Aed\'{i}n Culhane}
+\author[1]{Aed\'{i}n C. Culhane}
 \author[1]{Benjamin Haibe-Kains}
 \author[1]{John Quackenbush}
 \affil[1]{Biostatistics and Computational Biology, Dana-Farber Cancer Institute, Harvard School of Public Health, Boston, USA}
@@ -60,11 +60,11 @@
 
 \SweaveOpts{highlight=TRUE, tidy=TRUE, keep.space=TRUE, keep.blank.space=FALSE, keep.comment=TRUE}
 
-<<setup,echo=FALSE,results=hide>>=
-library(pgfSweave)
-setCacheDir("cache")
-options(keep.source=TRUE)
-@
+%<<setup,echo=FALSE,results=hide>>=
+%library(pgfSweave)
+%setCacheDir("cache")
+%options(keep.source=TRUE)
+%@
 
 \maketitle
 \tableofcontents
@@ -75,7 +75,7 @@ options(keep.source=TRUE)
 
 A common task in recent gene set or gene signature analyses is testing for up- and down-regulation of these gene sets or gene signatures in Gene Ontology (GO) terms. Or having a gene or set of genes of interest and looking at the GO terms that include that gene or gene set. For a closer look at the distribution of the GO terms in the different tree structures of the three GO categories one has to either rebuild the GO tree himself with the help of published R packages, or copy and paste the GO terms of interest into existing web services to display the GO tree. One of these web services is AmiGO visualize:
 \begin{description}
-\item[AmiGO vizualise:] \url{http://amigo.geneontology.org/cgi-bin/amigo/amigo?mode=visualize}
+\item[AmiGO visualize:] \url{http://amigo.geneontology.org/cgi-bin/amigo/amigo?mode=visualize}
 \end{description}
 
 The \Rpackage{RamiGO} package is providing functions to interact with the AmiGO visualize web server and retrieves GO (Gene Ontology) trees in various formats. The most common requests would be as png or svg, but a file representation of the tree in the GraphViz DOT format is also possible. \Rpackage{RamiGO} also provides a parser for the GraphViz DOT format that returns a graph object and meta data in R.
@@ -83,23 +83,12 @@ The \Rpackage{RamiGO} package is providing functions to interact with the AmiGO 
 %------------------------------------------------------------
 \section{Getting started}
 %------------------------------------------------------------ 
-At first we load the \Rpackage{RamiGO} into the current workspace:
+At first we load the \Rpackage{RamiGO} package into the current workspace:
 
 <<loadpackages,results=hide>>=
 library(RamiGO)
 @
 
-\Rfunction{strapply} enables perl-like regular expression in R, as do \Rfunction{grep, sub or gsub}. In particular, it enables the use of the perl variables \$1, \$2, ... for extracting information from within a regular expression. The code below shows an example of the use of \Rfunction{strapply}. The string within brackets (...) is returned in a list by \Rfunction{strapply}.
-
-<<strapplyexample>>=
-strapply(c("node25 -> node30"), "node([\\d]+) -> node([\\d]+)", c, backref = -2)
-@
-
-The \Rpackage{RCurl} package is useful for communicating with a web server and sending GET or POST requests. \Rpackage{RamiGO} uses the \Rfunction{postForm()} function to communicate with the AmiGO web server. The \Rpackage{png} package is used to convert the web server response for a png request into an actual png file. The \Rpackage{igraph} package is used to build a graph object representing the tree that was parsed from an DOT format file.
-
-%------------------------------------------------------------
-\section{Example}
-%------------------------------------------------------------ 
 The \Rpackage{RamiGO} package currently provides two functions that enable the user to retrieve directed acyclic trees from AmiGO and parse the GraphViz DOT format. An example on how to use the functions is given below.
 
 To retrieve a tree from AmiGO, the user has to provide a vector of GO ID's. For example GO:0051130, GO:0019912, GO:0005783, GO:0043229 and GO:0050789. These GO ID's represent entries from the three GO categories: Biological Process, Molecular Function and Cellular Component. The given GO ID's can be highlighted with different colors within the tree, therefor the user has to provide a vector of colors for each GO ID. A request could look like this:
@@ -207,6 +196,17 @@ The \Rfunction{adjM2gml} function in \Rpackage{RamiGO} creates a Cytoscape speci
 \caption{Example GML imported in Cytoscape.}
 \label{fig:cyto}
 \end{figure}
+
+%------------------------------------------------------------
+\section{Misc}
+%------------------------------------------------------------ 
+\Rfunction{strapply} enables perl-like regular expression in R, as do \Rfunction{grep, sub or gsub}. In particular, it enables the use of the perl variables \$1, \$2, ... for extracting information from within a regular expression. The code below shows an example of the use of \Rfunction{strapply}. The string within brackets (...) is returned in a list by \Rfunction{strapply}.
+
+<<strapplyexample>>=
+strapply(c("node25 -> node30"), "node([\\d]+) -> node([\\d]+)", c, backref = -2)
+@
+
+The \Rpackage{RCurl} package is useful for communicating with a web server and sending GET or POST requests. \Rpackage{RamiGO} uses the \Rfunction{postForm()} function to communicate with the AmiGO web server. The \Rpackage{png} package is used to convert the web server response for a png request into an actual png file. The \Rpackage{igraph} package is used to build a graph object representing the tree that was parsed from an DOT format file.
 
 \newpage
 %------------------------------------------------------------
