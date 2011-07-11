@@ -45,35 +45,35 @@ leaves(object) <- value
   \item{object}{An AmigoDot S4 object}
 
   \item{value}{An AmigoDot S4 object}
+}
+\details{
+  \code{agraph(object)}{Gets the igraph object.}
 
-  \item{agraph}{An igraph object.}
+  \code{agraph(object) <- value}{Sets the igraph object.}
 
-  \item{agraph<-}{Set the igraph object.}
+  \code{adjMatrix(object)}{Gets the adjacency matrix.}
 
-  \item{adjMatrix}{An adjacency matrix.}
+  \code{adjMatrix(object) <- value}{Sets the adjacency matrix.}
 
-  \item{adjMatrix<-}{Set the adjacency matrix.}
-
-  \item{annot}{A data.frame containing the annotation of the tree with
+  \code{annot(object)}{Gets the data.frame containing the annotation of the tree with
     the columns node, GO_ID, description, color, fillcolor and fontcolor.}
 
-  \item{annot<-}{Set the data.frame containing the annotation of the tree with
+  \code{annot(object) <- value}{Sets the the data.frame containing the annotation of the tree with
     the columns node, GO_ID, description, color, fillcolor and fontcolor.}
 
-  \item{relations}{A data.frame containing the relations between the node
+  \code{relations(object)}{Gets the data.frame containing the relations between the node
     of the tree and also information about the edges. The columns are
     parent, child, arrowhead, arrowtail, color and style.}
 
-  \item{relations<-}{Set the data.frame containing the relations between the node
+  \code{relations(object) <- value}{Sets the the data.frame containing the relations between the node
     of the tree and also information about the edges. The columns are
     parent, child, arrowhead, arrowtail, color and style.}
 
-  \item{leaves}{A data.frame containing the leaves of the tree with
+  \code{leaves(object)}{Gets the data.frame containing the leaves of the tree with
     the columns node, GO_ID, description, color, fillcolor and fontcolor.}
 
-  \item{leaves<-}{Set the data.frame containing the leaves of the tree with
+  \code{leaves(object) <- value}{Sets the the data.frame containing the leaves of the tree with
     the columns node, GO_ID, description, color, fillcolor and fontcolor.}
-
 }
 
 \value{
