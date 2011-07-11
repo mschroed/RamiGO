@@ -1,7 +1,10 @@
 exportPattern("^[^\\.]")
 
-import(igraph)
 import(methods)
+importFrom(igraph,igraph.to.graphNEL,graph.adjacency,E,"E<-",V,"V<-",ecount,vcount,get.edgelist,is.directed)
+importClassesFrom(graph,graphAM,graphNEL,graph)
+importFrom(RCytoscape,CytoscapeWindow,displayGraph,layout)
 importFrom(RCurl,postForm)
 importFrom(png,readPNG,writePNG)
 exportClasses(AmigoDot)
+export(agraph,adjMatrix,annot,relations,leaves)

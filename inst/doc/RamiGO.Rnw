@@ -133,7 +133,7 @@ leavesTT[,c("node","GO_ID","description")]
 In order to export the tree to an GML file that is readable by Cytoscape, you have to call the \Rfunction{adjM2gml} with some of the results from the \Rfunction{readAmigoDot} function. The following example creates a GML file by internally calling the \Rfunction{exportCytoGML}:
 
 <<adjM2gml>>=
-adjM2gml(adjMatrix(tt),relations(tt)$color,annot(tt)$fillcolor,annot(tt)$GO_ID,annot(tt)$description,"example")
+gg <- adjM2gml(adjMatrix(tt),relations(tt)$color,annot(tt)$fillcolor,annot(tt)$GO_ID,annot(tt)$description,"example")
 @
 
 The result is a GML file named example.gml that can be imported into Cytoscape as a network file.

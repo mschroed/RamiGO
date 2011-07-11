@@ -1,7 +1,8 @@
 readAmigoDot <- function(object,filename) {
-  if(missing(object)){
-    stop("readAmigoDot: Object with DOT file content is missing!")
+  if(missing(object) && missing(filename)){
+    stop("readAmigoDot: You have to provide something!")
   }
+  
   if(!missing(filename)){
     ## read dot file
     inputData <- readLines(filename);

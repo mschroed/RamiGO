@@ -24,9 +24,9 @@ setValidity("AmigoDot", function(object) {
 })
 
 setGeneric("agraph", function(object) standardGeneric("agraph"))
-setGeneric("agraph<-", function(object, ..., value) standardGeneric("agraph<-"))
+setGeneric("agraph<-", function(object, value) standardGeneric("agraph<-"))
 setMethod(agraph, "AmigoDot", function(object) slot(object, "agraph"))
-setReplaceMethod("agraph", "AmigoDot", function(object, ..., value)
+setReplaceMethod("agraph", "AmigoDot", function(object, value)
 {
       slot(object, "agraph") <- value
       validObject(object)
@@ -34,9 +34,9 @@ setReplaceMethod("agraph", "AmigoDot", function(object, ..., value)
 })
 
 setGeneric("adjMatrix", function(object) standardGeneric("adjMatrix"))
-setGeneric("adjMatrix<-", function(object, ..., value) standardGeneric("adjMatrix<-"))
+setGeneric("adjMatrix<-", function(object, value) standardGeneric("adjMatrix<-"))
 setMethod(adjMatrix, "AmigoDot", function(object) slot(object, "adjMatrix"))
-setReplaceMethod("adjMatrix", "AmigoDot", function(object, ..., value)
+setReplaceMethod("adjMatrix", "AmigoDot", function(object, value)
 {
       slot(object, "adjMatrix") <- value
       validObject(object)
@@ -44,9 +44,9 @@ setReplaceMethod("adjMatrix", "AmigoDot", function(object, ..., value)
 })
 
 setGeneric("annot", function(object) standardGeneric("annot"))
-setGeneric("annot<-", function(object, ..., value) standardGeneric("annot<-"))
+setGeneric("annot<-", function(object, value) standardGeneric("annot<-"))
 setMethod(annot, "AmigoDot", function(object) slot(object, "annot"))
-setReplaceMethod("annot", "AmigoDot", function(object, ..., value)
+setReplaceMethod("annot", "AmigoDot", function(object, value)
 {
       slot(object, "annot") <- value
       validObject(object)
@@ -54,9 +54,9 @@ setReplaceMethod("annot", "AmigoDot", function(object, ..., value)
 })
 
 setGeneric("relations", function(object) standardGeneric("relations"))
-setGeneric("relations<-", function(object, ..., value) standardGeneric("relations<-"))
+setGeneric("relations<-", function(object, value) standardGeneric("relations<-"))
 setMethod(relations, "AmigoDot", function(object) slot(object, "relations"))
-setReplaceMethod("relations", "AmigoDot", function(object, ..., value)
+setReplaceMethod("relations", "AmigoDot", function(object, value)
 {
       slot(object, "relations") <- value
       validObject(object)
@@ -64,9 +64,9 @@ setReplaceMethod("relations", "AmigoDot", function(object, ..., value)
 })
 
 setGeneric("leaves", function(object) standardGeneric("leaves"))
-setGeneric("leaves<-", function(object, ..., value) standardGeneric("leaves<-"))
+setGeneric("leaves<-", function(object, value) standardGeneric("leaves<-"))
 setMethod(leaves, "AmigoDot", function(object) slot(object, "leaves"))
-setReplaceMethod("leaves", "AmigoDot", function(object, ..., value)
+setReplaceMethod("leaves", "AmigoDot", function(object, value)
 {
       slot(object, "leaves") <- value
       validObject(object)

@@ -1,11 +1,26 @@
 \name{AmigoDot}
 \alias{AmigoDot}
 \alias{agraph}
+\alias{agraph<-}
 \alias{adjMatrix}
+\alias{adjMatrix<-}
 \alias{annot}
+\alias{annot<-}
 \alias{relations}
+\alias{relations<-}
 \alias{leaves}
-
+\alias{leaves<-}
+% Accessors:
+\alias{agraph,AmigoDot-method}
+\alias{agraph<-,AmigoDot-method}
+\alias{adjMatrix,AmigoDot-method}
+\alias{adjMatrix<-,AmigoDot-method}
+\alias{annot,AmigoDot-method}
+\alias{annot<-,AmigoDot-method}
+\alias{relations,AmigoDot-method}
+\alias{relations<-,AmigoDot-method}
+\alias{leaves,AmigoDot-method}
+\alias{leaves<-,AmigoDot-method}
 
 \title{AmigoDot constructor and accessors}
 
@@ -15,28 +30,50 @@
 
 \usage{
 agraph(object)
+agraph(object) <- value
 adjMatrix(object)
+adjMatrix(object) <- value
 annot(object)
+annot(object) <- value
 relations(object)
+relations(object) <- value
 leaves(object)
+leaves(object) <- value
 }
 
 \arguments{
   \item{object}{An AmigoDot S4 object}
 
+  \item{value}{An AmigoDot S4 object}
+
   \item{agraph}{An igraph object.}
+
+  \item{agraph<-}{Set the igraph object.}
 
   \item{adjMatrix}{An adjacency matrix.}
 
+  \item{adjMatrix<-}{Set the adjacency matrix.}
+
   \item{annot}{A data.frame containing the annotation of the tree with
+    the columns node, GO_ID, description, color, fillcolor and fontcolor.}
+
+  \item{annot<-}{Set the data.frame containing the annotation of the tree with
     the columns node, GO_ID, description, color, fillcolor and fontcolor.}
 
   \item{relations}{A data.frame containing the relations between the node
     of the tree and also information about the edges. The columns are
     parent, child, arrowhead, arrowtail, color and style.}
 
+  \item{relations<-}{Set the data.frame containing the relations between the node
+    of the tree and also information about the edges. The columns are
+    parent, child, arrowhead, arrowtail, color and style.}
+
   \item{leaves}{A data.frame containing the leaves of the tree with
     the columns node, GO_ID, description, color, fillcolor and fontcolor.}
+
+  \item{leaves<-}{Set the data.frame containing the leaves of the tree with
+    the columns node, GO_ID, description, color, fillcolor and fontcolor.}
+
 }
 
 \value{

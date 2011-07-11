@@ -5,11 +5,6 @@ adjM2gml <- function(adjMatrix, edgecolor, vertexcolor, nodelabels, nodedescript
 	## adjacency matrix representing the topology; parents in rows, children in columns
 	if(any(dim(adjMatrix) <= 0)) { stop("Network should contain at least one node!") }
 	
-	## check filename
-	if(missing(filename)){
-    filename <- "graph"
-  }
-	
 	## create igraph object
 	net.igraph <- graph.adjacency(adjmatrix=adjMatrix, mode="directed")
 	
@@ -56,5 +51,9 @@ adjM2gml <- function(adjMatrix, edgecolor, vertexcolor, nodelabels, nodedescript
   } else {
     V(net.igraph)$color <- rep("#0099ff", length(V(net.igraph)))
   }
-	exportCytoGML(graph=net.igraph, filename=sprintf("%s.gml", filename))
+	## check filename
+	if(!missing(filename)){
+    exportCytoGML(graph=net.igraph, filename=sprintf("%s.gml", filename))
+  }
+	return("advGraph"=net.igraph)
 }
