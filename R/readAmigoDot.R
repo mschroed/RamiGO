@@ -16,7 +16,7 @@ readAmigoDot <- function(object,filename) {
   nodeData <- inputData[grep("\tnode[\\d]+\\s->\\snode[\\d]+\\s\\[",inputData,perl=TRUE)]
   
   ## get meta data
-  metaDataValues <- sapply(t(metaData),function(x)strapply(x, '(node[\\d]+).*(GO:[\\d]+)<br/>(.+)</TD>.*,\\scolor=["]?(#.+[^"]|.+[^"])["]?,\\sfillcolor=["]?(#.+[^"]|.+[^"])["]?,\\sfontcolor=["]?(#.+[^"]|.+[^"])["]?];', c, backref = -6))
+  metaDataValues <- sapply(t(metaData),function(x)strapply(x, '(node[\\d]+).*(GO:[\\d]+|BFO:[\\d]+)<br/>(.+)</TD>.*,\\scolor=["]?(#.+[^"]|.+[^"])["]?,\\sfillcolor=["]?(#.+[^"]|.+[^"])["]?,\\sfontcolor=["]?(#.+[^"]|.+[^"])["]?];', c, backref = -6))
   annot <- NULL
   for(i in 1:6){
     annot <- cbind(annot,as.character(sapply(metaDataValues,function(x)x[i])))
