@@ -33,10 +33,10 @@ dd <- getAmigoTree(goIDs=goIDs,color=color,
   filename="example",picType="dot",saveResult=TRUE)
 
 ## parse file or object
-##tt1 <- readAmigoDot(filename="example.dot")
+#tt1 <- readAmigoDot(filename="example.dot")
 tt2 <- readAmigoDot(object=dd)
 
 ## look at results
-##show(tt1)
+#show(tt1)
 show(tt2)
 }

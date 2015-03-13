@@ -1,0 +1,19 @@
+citEntry(entry="article",
+         title = "RamiGO: an R/Bioconductor package providing an AmiGO Visualize interface",
+         author = personList( as.person("Markus S. Schr\"{o}der"),
+                              as.person("Daniel Gusenleitner"),
+                              as.person("John Quackenbush"),
+                              as.person("Aedin C. Culhane"),
+                              as.person("Benjamin Haibe-Kains")),
+         year = 2013,
+         journal = "Bioinformatics",
+         volume = "29",
+         pages = "666-668",
+         doi = "10.1093/bioinformatics/bts708",
+         url = "http://bioinformatics.oxfordjournals.org/content/29/5/666.full",
+         
+         textVersion = 
+         paste("Markus S. Schr\"{o}der, Daniel Gusenleitner, John Quackenbush, Aedin C. Culhane and Benjamin Haibe-Kains (2013):", 
+               "RamiGO: an R/Bioconductor package providing an AmiGO Visualize interface.",
+                "Bioinformatics 29:666-668" ) )
+

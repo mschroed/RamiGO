@@ -60,11 +60,12 @@
 
 \SweaveOpts{highlight=TRUE, tidy=TRUE, keep.space=TRUE, keep.blank.space=FALSE, keep.comment=TRUE}
 
-%<<setup,echo=FALSE,results=hide>>=
-%library(pgfSweave)
-%setCacheDir("cache")
-%options(keep.source=TRUE)
-%@
+<<setup,echo=FALSE,results=hide>>=
+##library(pgfSweave)
+##setCacheDir("cache")
+options(keep.source=TRUE)
+options(width=60)
+@
 
 \maketitle
 \tableofcontents
@@ -72,6 +73,8 @@
 %------------------------------------------------------------
 \section{Introduction}
 %------------------------------------------------------------ 
+Please cite RamiGo as follows:
+Markus S. Schr\"{o}der, Daniel Gusenleitner, John Quackenbush, Aed\'{i}n C. Culhane and Benjamin Haibe-Kains (2013): RamiGO: an R/Bioconductor package providing an AmiGO Visualize interface. \textit{Bioinformatics} 29(5):666-668.
 
 A common task in recent gene set or gene signature analyses is testing for up- and down-regulation of these gene sets or gene signatures in Gene Ontology (GO) terms. Or having a gene or set of genes of interest and looking at the GO terms that include that gene or gene set. For a closer look at the distribution of the GO terms in the different tree structures of the three GO categories one has to either rebuild the GO tree himself with the help of published R packages, or copy and paste the GO terms of interest into existing web services to display the GO tree. One of these web services is AmiGO visualize:
 \begin{description}
@@ -101,7 +104,7 @@ pngRes <- getAmigoTree(goIDs=goIDs, color=color, filename="example", picType="pn
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=1\textwidth]{example.png}
+%\includegraphics[width=1\textwidth]{example.png}
 \caption{Example PNG returned from AmiGO.}
 \label{fig:amiGOpng}
 \end{figure}
@@ -132,7 +135,7 @@ leavesTT[,c("node","GO_ID","description")]
 
 In order to export the tree to an GML file that is readable by Cytoscape, you have to call the \Rfunction{adjM2gml} with some of the results from the \Rfunction{readAmigoDot} function. The following example creates a GML file by internally calling the \Rfunction{exportCytoGML}:
 
-<<adjM2gml>>=
+<<adjM2gml, eval=FALSE>>=
 gg <- adjM2gml(adjMatrix(tt),relations(tt)$color,annot(tt)$fillcolor,annot(tt)$GO_ID,annot(tt)$description,"example")
 @
 

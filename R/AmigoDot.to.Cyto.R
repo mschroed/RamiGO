@@ -12,5 +12,5 @@ AmigoDot.to.Cyto <- function(object){
 
   cw <- CytoscapeWindow('RamiGO', ggCyto)
   displayGraph(cw)
-  layout(cw, layout.name = "hierarchical")
+  layoutNetwork(cw, layout.name = "hierarchical")
 }

@@ -1,0 +1,7 @@
+# R Package RamiGO - NEWS
+
+RamiGO 1.9.5
+- RamiGO is now using AmiGO v2 Visualize as the default web server.
+
+RamiGO 1.9.1
+- added citation information. Please cite http://bioinformatics.oxfordjournals.org/content/29/5/666.full
